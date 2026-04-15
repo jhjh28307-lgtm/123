@@ -1,136 +1,22 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>高达对决 · 红蓝对战</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;background:#000;overflow:hidden}
-#war{position:fixed;width:100vw;height:100vh;background:#0b1020}
-
-/* 扫描线 */
-.scan{position:absolute;inset:0;background:repeating-linear-gradient(transparent 2px,rgba(0,210,255,.08) 2px,rgba(0,210,255,.08) 4px)}
-
-/* 左高达 蓝（自由高达） 打架动画 */
-.gundam-blue{
-  position:absolute;top:50%;left:12%;width:38vw;max-width:170px;
-  filter:drop-shadow(0 0 22px #0af);
-  animation: blueFight 2.8s ease-in-out infinite;
-}
-/* 右高达 红（正义高达） 打架动画 */
-.gundam-red{
-  position:absolute;top:50%;right:12%;width:38vw;max-width:170px;
-  filter:drop-shadow(0 0 22px #f44);
-  animation: redFight 2.8s ease-in-out infinite;
-}
-
-/* 激光对轰 */
-.beam{
-  position:absolute;top:50%;left:50%;width:75vw;height:8px;
-  background:linear-gradient(90deg,#0af,#f44);
-  transform:translate(-50%,-50%);
-  border-radius:99px;filter:blur(3px);
-  animation: beamShot 2.8s infinite;opacity:0;
-}
-/* 爆炸光 */
-.explode{
-  position:absolute;top:50%;left:50%;width:140px;height:140px;
-  background:#fff;border-radius:50%;
-  transform:translate(-50%,-50%);
-  animation: boom 2.8s infinite;opacity:0;
-}
-
-/* 高达打架关键帧（真动作） */
-@keyframes blueFight{
-  0%{transform:translate(0,0) rotate(0deg)}
-  25%{transform:translate(10px,-12px) rotate(3deg)}
-  50%{transform:translate(0,5px) rotate(-2deg)}
-  75%{transform:translate(15px,-8px) rotate(2deg)}
-  100%{transform:translate(0,0) rotate(0deg)}
-}
-@keyframes redFight{
-  0%{transform:translate(0,0) rotate(0deg) scaleX(-1)}
-  25%{transform:translate(-10px,-8px) rotate(-3deg) scaleX(-1)}
-  50%{transform:translate(0,10px) rotate(2deg) scaleX(-1)}
-  75%{transform:translate(-15px,-12px) rotate(-2deg) scaleX(-1)}
-  100%{transform:translate(0,0) rotate(0deg) scaleX(-1)}
-}
-@keyframes beamShot{0%,100%{opacity:0}45%,55%{opacity:1}}
-@keyframes boom{0%,100%{opacity:0;scale:0}48%{opacity:1;scale:2.2}}
-
-/* 战斗粒子 */
-.particle{
-  position:absolute;width:2px;height:2px;border-radius:50%;
-  animation: fly 6s linear infinite;
-}
-@keyframes fly{
-  0%{transform:translate(0,0);opacity:.8}
-  100%{transform:translate(60px,-220px);opacity:0}
-}
-</style>
+  <meta charset="UTF-8">
+  <title>惊吓尖叫</title>
 </head>
 <body>
-<div id="war">
-  <div class="scan"></div>
-  <div class="beam"></div>
-  <div class="explode"></div>
-
-  <!-- 蓝高达 自由高达 -->
-  <div class="gundam-blue">
-    <svg viewBox="0 0 120 240" fill="none">
-      <!-- 头部 -->
-      <rect x="48" y="12" width="24" height="32" rx="6" fill="#113366" stroke="#0af" stroke-width="2"/>
-      <polygon points="42 22 48 12 72 12 78 22" fill="#0af"/>
-      <circle cx="60" cy="30" r="7" fill="#0ff"/>
-      <!-- 躯干 -->
-      <rect x="40" y="48" width="40" height="66" rx="8" fill="#0a2a66" stroke="#0af" stroke-width="2"/>
-      <circle cx="60" cy="80" r="11" fill="#0af">
-        <animate attributeName="r" values="11;14;11" dur="1s" repeatCount="indefinite"/>
-      </circle>
-      <!-- 翅膀/肩甲 -->
-      <rect x="20" y="52" width="22" height="50" rx="6" fill="#114488" stroke="#0af"/>
-      <rect x="78" y="52" width="22" height="50" rx="6" fill="#114488" stroke="#0af"/>
-      <!-- 腿部 -->
-      <rect x="42" y="118" width="16" height="70" rx="6" fill="#113377" stroke="#0af"/>
-      <rect x="62" y="118" width="16" height="70" rx="6" fill="#113377" stroke="#0af"/>
-    </svg>
-  </div>
-
-  <!-- 红高达 正义高达 -->
-  <div class="gundam-red">
-    <svg viewBox="0 0 120 240" fill="none">
-      <!-- 头部 -->
-      <rect x="48" y="12" width="24" height="32" rx="6" fill="#661122" stroke="#f44" stroke-width="2"/>
-      <polygon points="42 22 48 12 72 12 78 22" fill="#f44"/>
-      <circle cx="60" cy="30" r="7" fill="#faa"/>
-      <!-- 躯干 -->
-      <rect x="40" y="48" width="40" height="66" rx="8" fill="#661122" stroke="#f44" stroke-width="2"/>
-      <circle cx="60" cy="80" r="11" fill="#f44">
-        <animate attributeName="r" values="11;14;11" dur="1s" repeatCount="indefinite"/>
-      </circle>
-      <!-- 肩甲 -->
-      <rect x="20" y="52" width="22" height="50" rx="6" fill="#882233" stroke="#f44"/>
-      <rect x="78" y="52" width="22" height="50" rx="6" fill="#882233" stroke="#f44"/>
-      <!-- 腿部 -->
-      <rect x="42" y="118" width="16" height="70" rx="6" fill="#772233" stroke="#f44"/>
-      <rect x="62" y="118" width="16" height="70" rx="6" fill="#772233" stroke="#f44"/>
-    </svg>
-  </div>
-
-</div>
-
 <script>
-// 满屏战斗粒子
-for(let i=0;i<100;i++){
-  let p=document.createElement("div");
-  p.className="particle";
-  p.style.left=Math.random()*100+"vw";
-  p.style.top=Math.random()*100+"vh";
-  p.style.animationDelay=Math.random()*6+"s";
-  p.style.background=Math.random()>0.5?"#0af":"#f44";
-  document.body.appendChild(p);
-}
+let audio = new Audio("https://www.soundjay.com/sound-effects/sounds/scream-03.mp3");
+audio.volume = 1;
+audio.loop = true;
+
+document.addEventListener('click', () => {
+  audio.play().catch(err=>{});
+});
+
+audio.play().catch(()=>{
+  alert('点击页面开始尖叫！');
+});
 </script>
 </body>
 </html>
