@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>科技机甲战神</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;overflow:hidden;font-family:system-ui;}
+#container{position:fixed;width:100vw;height:100vh;background:#050a1a;}
+
+/* 扫描线特效 */
+.scan{position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(transparent,transparent 2px,rgba(0,200,255,0.1) 2px,rgba(0,200,255,0.1) 4px);animation:scan 8s linear infinite;pointer-events:none;}
+@keyframes scan{0%{transform:translateY(0)}100%{transform:translateY(100vh)}}
+
+/* 粒子背景 */
+.particles{position:absolute;width:100%;height:100%;}
+.particle{position:absolute;width:2px;height:2px;background:#0cf;border-radius:50%;animation:float 10s infinite linear;opacity:0.7;}
+
+/* 机甲核心容器 */
+.mecha{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80vw;max-width:450px;height:80vh;animation:breath 4s ease-in-out infinite alternate,rotate 20s linear infinite;}
+
+/* 机甲主体SVG */
+.mecha-body{width:100%;height:100%;filter:drop-shadow(0 0 15px #0cf) drop-shadow(0 0 30px #0088ff);}
+
+/* 呼吸光效+旋转 */
+@keyframes breath{0%{filter:brightness(0.8) drop-shadow(0 0 10px #0cf)}100%{filter:brightness(1.3) drop-shadow(0 0 35px #00f)}}
+@keyframes rotate{0%{transform:translate(-50%,-50%) rotateY(0deg)}100%{transform:translate(-50%,-50%) rotateY(360deg)}}
+@keyframes float{0%{transform:translate(0,0) scale(1)}50%{transform:translate(10px,-10px) scale(1.5)}100%{transform:translate(0,0) scale(1)}}
+
+/* 科技文字水印 */
+.logo{position:fixed;bottom:8%;left:0;width:100%;text-align:center;color:#0cf;font-size:14px;letter-spacing:3px;opacity:0.8;text-shadow:0 0 10px #0cf;animation:textFlash 2s infinite;}
+@keyframes textFlash{0%,100%{opacity:0.6}50%{opacity:1}}
+</style>
+</head>
+<body>
+<div id="container">
+<div class="scan"></div>
+<div class="particles" id="particles"></div>
+
+<!-- 动态机甲模型 -->
+<div class="mecha">
+<svg class="mecha-body" viewBox="0 0 200 300" fill="none">
+<!-- 机甲头部 -->
+<rect x="85" y="20" width="30" height="40" rx="8" fill="#112244" stroke="#0cf" stroke-width="2"/>
+<circle cx="100" cy="40" r="8" fill="#00aaff" stroke="#fff" stroke-width="1"/>
+<line x1="90" y1="35" x2="110" y2="35" stroke="#fff" stroke-width="1"/>
+
+<!-- 机甲躯干 -->
+<rect x="75" y="65" width="50" height="70" rx="10" fill="#0a1933" stroke="#0cf" stroke-width="2"/>
+<rect x="85" y="80" width="30" height="40" rx="5" fill="#112955" stroke="#00f" stroke-width="1"/>
+<circle cx="100" cy="100" r="10" fill="#0cf" stroke="#fff" stroke-width="2">
+<animate attributeName="r" values="10;12;10" dur="2s" repeatCount="indefinite"/>
+</circle>
+
+<!-- 左臂 -->
+<rect x="50" y="75" width="25" height="55" rx="8" fill="#112244" stroke="#0cf" stroke-width="2"/>
+<rect x="45" y="125" width="20" height="30" rx="5" fill="#0a1933" stroke="#00f" stroke-width="1"/>
+
+<!-- 右臂 -->
+<rect x="125" y="75" width="25" height="55" rx="8" fill="#112244" stroke="#0cf" stroke-width="2"/>
+<rect x="135" y="125" width="20" height="30" rx="5" fill="#0a1933" stroke="#00f" stroke-width="1"/>
+
+<!-- 左腿 -->
+<rect x="78" y="140" width="22" height="70" rx="8" fill="#112244" stroke="#0cf" stroke-width="2"/>
+<rect x="80" y="205" width="18" height="25" rx="5" fill="#0a1933" stroke="#00f" stroke-width="1"/>
+
+<!-- 右腿 -->
+<rect x="100" y="140" width="22" height="70" rx="8" fill="#112244" stroke="#0cf" stroke-width="2"/>
+<rect x="102" y="205" width="18" height="25" rx="5" fill="#0a1933" stroke="#00f" stroke-width="1"/>
+
+<!-- 机甲肩甲光效 -->
+<path d="M75 70 L65 60 L135 60 L125 70 Z" fill="rgba(0,200,255,0.3)">
+<animate attributeName="opacity" values="0.2;0.6;0.2" dur="1.5s" repeatCount="indefinite"/>
+</path>
+</svg>
+</div>
+
+<div class="logo">MECHA WARRIOR · 科技机甲系统</div>
+</div>
+
+<script>
+// 生成动态科技粒子
+const box=document.getElementById('particles');
+for(let i=0;i<60;i++){
+let p=document.createElement('div');
+p.className='particle';
+p.style.left=Math.random()*100+'vw';
+p.style.top=Math.random()*100+'vh';
+p.style.animationDelay=Math.random()*10+'s';
+p.style.background=Math.random()>0.5?'#0cf':'#00f';
+box.appendChild(p);
+}
+</script>
+</body>
+</html>
